@@ -1,0 +1,17 @@
+cmake_minimum_required(VERSION 3.5)
+
+file(GLOB_RECURSE SRCS ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.[ch]pp)
+
+add_library(CVLib STATIC ${SRCS})
+
+target_include_directories(CVLib SYSTEM PUBLIC
+${CERES_INCLUDE_DIRS}
+$ENV{EIGEN3_INCLUDE_DIR}
+${OpenCV_INCLUDE_DIRS} 
+INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/Source)
+
+target_link_libraries(CVLib PUBLIC ${CERES_LIBRARIES} Eigen3::Eigen ${OpenCV_LIBS})
+
+set_target_properties(CVLib PROPERTIES
+    ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/Binaries
+    LIBRARY_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/Binaries)
