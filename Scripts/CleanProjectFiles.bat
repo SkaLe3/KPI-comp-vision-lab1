@@ -7,7 +7,7 @@ if exist %BUILD_DIR% (
     echo Cleaning up the build directory: %BUILD_DIR%
 
     del /S /Q *.* 2>nul
-    rmdir /S /Q * 2>nul
+    for /d %%i in (*) do rmdir /S /Q "%%i"
     
     echo Cleanup complete.
 ) else (
