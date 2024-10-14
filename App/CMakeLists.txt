@@ -4,6 +4,9 @@ file(GLOB_RECURSE SRCS ${CMAKE_CURRENT_SOURCE_DIR}/Source/*.[ch]pp)
 
 add_executable(App ${SRCS})
 
+set_target_properties(App PROPERTIES
+    VS_DEBUGGER_WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/Content")
+
 target_link_libraries(App PRIVATE ${CERES_LIBRARIES} Eigen3::Eigen ${OpenCV_LIBS} CVLib)
 
 # Set binary output directory for App

@@ -1,6 +1,12 @@
-#include "func.hpp"
+#include <SCompVision.hpp>
+#include <CVTest.hpp>
 
 int main()
 {
-    return CompVision::foo(3);
+	CVTest::RunEqualizeGrayscaleHistogram("input_image.jpg");
+
+
+
+
+	return 0;
 }
