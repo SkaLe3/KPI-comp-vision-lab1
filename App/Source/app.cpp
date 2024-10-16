@@ -3,7 +3,7 @@
 
 int main()
 {
-	CVTest::RunEqualizeGrayscaleHistogram("input_image.jpg");
+	CVTest::RunEqualizeGrayscaleHistogram("fire_grayscale.png");
 
 
 
