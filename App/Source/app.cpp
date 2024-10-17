@@ -3,7 +3,8 @@
 
 int main()
 {
-	CVTest::RunEqualizeGrayscaleHistogram("fire_grayscale.png");
+	//CVTest::RunEqualizeGrayscaleHistogram("fire_grayscale.png");
+	CVTest::RunEdgeDetector("fire_grayscale.png");
 
 
 

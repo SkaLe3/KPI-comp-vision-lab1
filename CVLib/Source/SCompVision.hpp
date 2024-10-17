@@ -4,4 +4,5 @@
 namespace CompVision
 {
 	void EqualizeGrayscaleHistogram(const cv::Mat& grayscaleImage, cv::Mat& outGrayscale);
+	void EdgeDetectionSobel(const cv::Mat& graysclaleImage, cv::Mat& outGrayscale);
 }
