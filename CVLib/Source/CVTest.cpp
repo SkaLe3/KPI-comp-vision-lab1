@@ -40,10 +40,26 @@ namespace CVTest
 			return;
 		}
 		cv::imshow("Original Image", image);
+
 		cv::Mat sobelImage;
 		CompVision::EdgeDetectionSobel(image, sobelImage);
 		cv::imshow("Sobel Image", sobelImage);
 		cv::imwrite(("sobel_" + filePath).c_str(), sobelImage);
+
+		cv::Mat scharrImage;
+		CompVision::EdgeDetectionScharr(image, scharrImage);
+		cv::imshow("Scharr Image", scharrImage);
+		cv::imwrite(("scharr_" + filePath).c_str(), scharrImage);
+
+		cv::Mat laplacianImage;
+		CompVision::EdgeDetectionLaplacian(image, laplacianImage);
+		cv::imshow("Laplacian Image", laplacianImage);
+		cv::imwrite(("laplacian_" + filePath).c_str(), laplacianImage);
+
+		cv::Mat cannyImage;
+		CompVision::EdgeDetectionCanny(image, cannyImage, 50, 150);
+		cv::imshow("Canny Image", cannyImage);
+		cv::imwrite(("canny_" + filePath).c_str(), cannyImage);
 		
 
 		cv::Mat imageB;
@@ -58,13 +74,18 @@ namespace CVTest
 		cv::imshow("Sobel Built In", sobel);
 
 		cv::Mat scharrX, scharrY, scharr;
-		cv::Sobel(image, scharrX, CV_64F, 1, 0);
-		cv::Sobel(image, scharrY, CV_64F, 0, 1);
-		cv::magnitude(scharrX, scharrY, scharr);
+		cv::Mat absScharrX, absScharrY;
+		cv::Scharr(image, scharrX, CV_64F, 1, 0);
+		cv::Scharr(image, scharrY, CV_64F, 0, 1);
+		cv::convertScaleAbs(scharrX, absScharrX);
+		cv::convertScaleAbs(scharrY, absScharrY);
+		cv::addWeighted(absScharrX, 0.5, absScharrY, 0.5, 0, scharr);
 		cv::imshow("Scharr Built In", scharr);
 
 		cv::Mat laplace;
 		cv::Laplacian(image, laplace, CV_64F);
+		cv::normalize(laplace, laplace, 0, 255, cv::NORM_MINMAX);
+		laplace.convertTo(laplace, CV_8U);
 		cv::imshow("Laplacian Built In", laplace);
 
 		cv::Mat canny;
